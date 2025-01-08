@@ -1,5 +1,8 @@
 import "./App.css";
 import { useState } from "react";
+import { MdDeleteForever } from "react-icons/md";
+import { FaUndo } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -105,18 +108,15 @@ function App() {
                     <p>{task.description}</p>
                   </div>
                   <div className="btn-group">
-                    <button
-                      className="primaryBt"
-                      onClick={() => handleComplete(task.id)}
-                    >
-                      {isCompleteScreen ? "Undo" : "Complete"}
-                    </button>
-                    <button
-                      className="primaryBt"
-                      onClick={() => handleDelete(task.id)}
-                    >
-                      Delete
-                    </button>
+                    {isCompleteScreen ? (
+                      <FaUndo className="icon" onClick={() => handleComplete(task.id)} />
+                    ) : (
+                      <FaCheck className="icon" onClick={() => handleComplete(task.id)} />
+                    )}
+                    <MdDeleteForever 
+                      className="icon" 
+                      onClick={() => handleDelete(task.id)} 
+                    />
                   </div>
                 </div>
               ))}

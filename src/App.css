@@ -59,7 +59,8 @@ h1 {
 
 .btn-group {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
   justify-content:flex-start;
 }
 
@@ -96,11 +97,13 @@ h1 {
 .todo-list {
   margin-top: 20px;
   display:block;
+  flex-direction: column;
 
 }
 
 .todo-item {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgb(38, 36, 36);
+  background: rgba(190, 193, 190, 0.1);
   padding: 15px;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -115,10 +118,20 @@ h1 {
 
 .todo-item h3 {
   margin: 0 0 5px 0;
+  color:#35ba5c
 }
 
 .todo-item p {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
 }
+.icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin: 0 5px;
+  transition: color 0.3s ease;
+}
 
+.icon:hover {
+  color: #aa1221;
+}

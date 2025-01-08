@@ -47,7 +47,7 @@ npm start
    - Click "Complete" to mark a task as done
    - Click "Delete" to remove a task
    - Use the "To do" and "Completed" tabs to filter tasks
-
+   - Use the "Undo" to restore tasks
 ## Project Structure
 ```
 todolist/
