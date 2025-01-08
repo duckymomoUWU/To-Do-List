@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(95, 92, 92);
+  background-color: rgb(15, 14, 14);
   color: rgb(240, 233, 233);
   overflow: hidden;
 }
@@ -12,7 +12,7 @@ body {
 
 h1 {
   text-align: center;
-  color: rgb(49, 229, 97);
+  color: rgb(230, 240, 233);
   margin-bottom: 30px;
 }
 
@@ -64,7 +64,7 @@ h1 {
 }
 
 .primaryBt {
-  height: 30px;  /* Đảm bảo button cùng chiều cao với input */
+  height: 32px;  /* Đảm bảo button cùng chiều cao với input */
   padding: 10px 20px;
   border: none;
   background-color: #22736f;
@@ -82,14 +82,21 @@ h1 {
   height: 30px;  /* Đảm bảo button cùng chiều cao với input */
   padding: 10px 20px;
   border: none;
-  background-color: #22736f;
+  background-color: #626262;
   color: white;
   border-radius: 4px;
   cursor:pointer;
   transition: background-color 0.3s;
+  width: fit-content;
+}
+
+.active{
+  background-color:#35ba5c
 }
 .todo-list {
   margin-top: 20px;
+  display:block;
+
 }
 
 .todo-item {
