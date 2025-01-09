@@ -16,27 +16,6 @@ A modern and responsive To-Do List application built with React that helps users
 - CSS3
 - JavaScript (ES6+)
 
-## Installation
-
-1. Clone the repository:
-```bash
-git clone [repository-url]
-```
-
-2. Navigate to the project directory:
-```bash
-cd todolist
-```
-
-3. Install dependencies:
-```bash
-npm install
-```
-
-4. Start the development server:
-```bash
-npm start
-```
 
 ## Usage
 1. Add a new task:
