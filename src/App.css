@@ -4,10 +4,29 @@ body {
   overflow: hidden;
 }
 
+/* NavHead */
+#navHead {
+  display: flex;
+  justify-content:space-between; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background-color: rgb(106, 105, 105);
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(154, 79, 79, 0.3);
+  padding: 0 50px;
+}
+
 .todo-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 60px auto; /* Tăng margin-top để tránh header */
   padding: 20px;
+  min-height: calc(100vh - 40px); /* Đảm bảo container chiếm đủ chiều cao còn lại */
+  position: relative;
+  top: 40px; /* Thêm khoảng cách từ trên xuống bằng với chiều cao của header */
 }
 
 h1 {
