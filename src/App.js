@@ -1,9 +1,8 @@
-// import logo from './whiteLogo.svg';
 import "./App.css";
 import { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { FaUndo } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
+import { FaUndo, FaCheck } from "react-icons/fa";
+import { ReactComponent as Logo } from './whiteLogo.svg';
 
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -52,12 +51,12 @@ function App() {
   return (
     <div className="App">
       <header id="navHead">
-        {/* <img src={logo} alt="Logo" id="headLogo" /> */}
+        <Logo id="headLogo" />
         {/* navbar  */}
         <ul>
           <div id="navBut">
-            <button className="primaryBt">Login</button>
-            <button className="primaryBt">Sign Up</button>
+            <button id="logBut">Login</button>
+            <button id="signBut">Sign Up</button>
           </div>
         </ul>
       </header>
