@@ -34,9 +34,22 @@ function App() {
   };
 
   const handleComplete = (id) => {
+    let now= new Date();
+    let dd=now.getDate();
+    let mm=now.getMonth()+1;
+    let yyyy=now.getFullYear();
+    let h=now.getHours();
+    let m=now.getMinutes();
+    let s=now.getSeconds();
+    let completedOn=dd+'-'+mm+'-'+yyyy+' at '+h+':'+m+':'+s;
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, completed: !task.completed };
+        if(task.completed){
+          return{
+            ...task,completed:false,completedOn:null
+          };
+        }
+        return { ...task, completed: !task.completed ,completedOn:completedOn};
       }
       return task;
     });
@@ -123,6 +136,7 @@ function App() {
                   <div className="content">
                     <h3>{task.title}</h3>
                     <p>{task.description}</p>
+                    {task.completedOn ? <p><small>Completed on: {task.completedOn}</small></p> : null}
                   </div>
                   <div className="btn-group">
                     {isCompleteScreen ? (
