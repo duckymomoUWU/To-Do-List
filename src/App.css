@@ -7,8 +7,8 @@ body {
 /* NavHead */
 #navHead {
   display: flex;
-  justify-content:space-between; /* Căn giữa theo chiều ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content:space-between; 
+  align-items: center; 
   background-color: rgb(106, 105, 105);
   height: 60px;
   position: fixed;
@@ -82,7 +82,7 @@ body {
   max-width: 800px;
   margin: 60px auto; 
   padding: 20px;
-  min-height: calc(100vh - 40px); 
+  height: calc(100vh - 100px); 
   position: relative;
   top: 40px; 
 }
@@ -98,6 +98,26 @@ h1 {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 140px); 
+  overflow-y: auto; 
+}
+
+.todo-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.todo-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.todo-wrapper::-webkit-scrollbar-thumb {
+  background: #eef2ef;
+  border-radius: 4px;
+}
+
+.todo-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #22736f;
 }
 
 .input-section {
@@ -130,6 +150,17 @@ h1 {
   box-sizing: border-box;
 }
 
+.todo-input-item input,
+.todo-input-item textarea {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  height: 38px;
+  box-sizing: border-box;
+}
+
 .controls-section {
   margin-bottom: 20px;
 }
@@ -153,6 +184,21 @@ h1 {
 }
 
 .primaryBt:hover {
+  background-color: #35ba5c;
+}
+
+.primaryBtn {
+  height: 32px;
+  padding: 0 20px;
+  border: none;
+  background-color: #22736f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primaryBtn:hover {
   background-color: #35ba5c;
 }
 
@@ -211,4 +257,44 @@ h1 {
 
 .icon:hover {
   color: #aa1221;
+}
+
+/* Edit Mode Styles */
+.edit-wrapper {
+  background: rgba(190, 193, 190, 0.1);
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.edit-wrapper input,
+.edit-wrapper textarea {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  box-sizing: border-box;
+}
+
+.edit-wrapper textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-wrapper button {
+  height: 32px;
+  padding: 0 20px;
+  border: none;
+  background-color: #22736f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-wrapper button:hover {
+  background-color: #35ba5c;
 }

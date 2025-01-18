@@ -2,19 +2,20 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaUndo, FaCheck } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
 import { ReactComponent as Logo } from './whiteLogo.svg';
-
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [currentEdit, setCurrentEdit] = useState("");
+  const [currentEditedItem, setCurrentEditedItem] = useState("");
   const [tasks, setTasks] = useState(() => {
-    // Load tasks from localStorage when initializing state
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-  // Save to localStorage whenever tasks changes
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -34,22 +35,22 @@ function App() {
   };
 
   const handleComplete = (id) => {
-    let now= new Date();
-    let dd=now.getDate();
-    let mm=now.getMonth()+1;
-    let yyyy=now.getFullYear();
-    let h=now.getHours();
-    let m=now.getMinutes();
-    let s=now.getSeconds();
-    let completedOn=dd+'-'+mm+'-'+yyyy+' at '+h+':'+m+':'+s;
+    let now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth() + 1;
+    let yyyy = now.getFullYear();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+    let completedOn = dd + '-' + mm + '-' + yyyy + ' at ' + h + ':' + m + ':' + s;
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
-        if(task.completed){
-          return{
-            ...task,completed:false,completedOn:null
+        if (task.completed) {
+          return {
+            ...task, completed: false, completedOn: null
           };
         }
-        return { ...task, completed: !task.completed ,completedOn:completedOn};
+        return { ...task, completed: !task.completed, completedOn: completedOn };
       }
       return task;
     });
@@ -59,6 +60,37 @@ function App() {
   const handleDelete = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
+  };
+
+  const handleEdit = (id) => {
+    const taskToEdit = tasks.find(task => task.id === id);
+    if (taskToEdit) {
+      setCurrentEdit(id);
+      setCurrentEditedItem(taskToEdit); 
+    }
+  };
+
+  const handleUpdateTitle = (value) => {
+    setCurrentEditedItem(prev => ({
+      ...prev,
+      title: value
+    }));
+  };
+
+  const handleUpdateDescription = (value) => {
+    setCurrentEditedItem(prev => ({
+      ...prev,
+      description: value
+    }));
+  };
+
+  const handleUpdateToDo = () => {
+    const updatedTasks = tasks.map(task => 
+      task.id === currentEdit ? currentEditedItem : task
+    );
+    setTasks(updatedTasks);
+    setCurrentEdit("");
+    setCurrentEditedItem(null);
   };
 
   return (
@@ -131,36 +163,67 @@ function App() {
           <div className="todo-list">
             {tasks
               .filter((task) => task.completed === isCompleteScreen)
-              .map((task) => (
-                <div className="todo-item" key={task.id}>
-                  <div className="content">
-                    <h3>{task.title}</h3>
-                    <p>{task.description}</p>
-                    {task.completedOn ? <p><small>Completed on: {task.completedOn}</small></p> : null}
-                  </div>
-                  <div className="btn-group">
-                    {isCompleteScreen ? (
-                      <FaUndo
-                        className="icon"
-                        onClick={() => handleComplete(task.id)}
+              .map((task, index) => {
+                if (currentEdit === task.id && currentEditedItem) {
+                  return (
+                    <div className="edit-wrapper" key={task.id}>
+                      <input 
+                        placeholder='Updated Title'
+                        onChange={(e) => handleUpdateTitle(e.target.value)}
+                        value={currentEditedItem.title || ''} 
                       />
-                    ) : (
-                      <FaCheck
-                        className="icon"
-                        onClick={() => handleComplete(task.id)}
+                      <textarea 
+                        placeholder='Updated Description'
+                        rows={4}
+                        onChange={(e) => handleUpdateDescription(e.target.value)}
+                        value={currentEditedItem.description || ''}
                       />
-                    )}
-                    <MdDeleteForever
-                      className="icon"
-                      onClick={() => handleDelete(task.id)}
-                    />
+                      <button
+                        type="button"
+                        onClick={handleUpdateToDo}
+                        className="primaryBtn"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="todo-item" key={task.id}>
+                    <div className="content">
+                      <h3>{task.title}</h3>
+                      <p>{task.description}</p>
+                      {task.completedOn && <p><small>Completed on: {task.completedOn}</small></p>}
+                    </div>
+                    <div className="btn-group">
+                      {isCompleteScreen ? (
+                        <FaUndo
+                          className="icon"
+                          onClick={() => handleComplete(task.id)}
+                        />
+                      ) : (
+                        <FaCheck
+                          className="icon"
+                          onClick={() => handleComplete(task.id)}
+                        />
+                      )}
+                      <MdDeleteForever
+                        className="icon"
+                        onClick={() => handleDelete(task.id)}
+                      />
+                      <CiEdit
+                        className="icon"
+                        onClick={() => handleEdit(task.id)}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
